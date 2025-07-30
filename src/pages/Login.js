@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
@@ -11,14 +11,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
-} from 'react-native';
+} from 'react-native'; 
+import { useNativeNavigation } from '../../NativeNavigation'; 
 
 const Login = () => {
   const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
- const navigation=useNavigation()
-  const handleLogin = () => {
-    navigation.navigate('Home')
+  const [password, setPassword] = useState(''); 
+  const navigation = useNativeNavigation();
+ 
+  const handleLogin = () => { 
+    navigation.navigate('Home');
   };
   
 
