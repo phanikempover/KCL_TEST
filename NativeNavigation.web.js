@@ -4,7 +4,10 @@ export const useNativeNavigation = () => {
   const navigate = useNavigate();
 
   return {
-    navigate: (path) => navigate(path),
-    goBack: () => window.history.back(), 
-  };
+    navigate: (path) => {
+      const AbsolutePath = path.startsWith('/');
+      navigate(AbsolutePath ? path : '/' + path);
+    },
+    goBack: () => window.history.back(),
+  }; 
 };

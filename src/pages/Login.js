@@ -1,5 +1,5 @@
 // import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -12,15 +12,21 @@ import {
   Platform,
   Image,
 } from 'react-native'; 
-import { useNativeNavigation } from '../../NativeNavigation'; 
-
+import { useNativeNavigation } from '../../NativeNavigation';
+import useResponsive from '../hooks/useResponsive';
+ 
 const Login = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState(''); 
   const navigation = useNativeNavigation();
+    const deviceType = useResponsive();
+ 
  
   const handleLogin = () => { 
-    navigation.navigate('Home');
+    if (Platform.OS === 'web') {
+      navigation.navigate('Home');
+    } else navigation.navigate('Main', { screen: 'Home' });
+  
   };
   
 
@@ -28,13 +34,9 @@ const Login = () => {
   
 
         <View style={styles.wrapper}>
-          {Platform.OS === 'web' && (
+          {Platform.OS === 'web' && deviceType !== 'mobile' && (
             <View style={styles.imageContainer}>
-              {/* <Image
-                source={{ uri: 'https://via.placeholder.com/500x600.png?text=Login+Banner' }}
-                style={styles.image}
-                resizeMode="cover"
-              /> */}
+              
               <Text style={styles.title}>Thllo</Text>
             </View>
           )}
